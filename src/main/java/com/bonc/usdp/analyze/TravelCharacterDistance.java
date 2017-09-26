@@ -4,7 +4,7 @@ import com.bonc.usdp.algorithm.dbscan.DistanceMetric;
 import com.bonc.usdp.entity.TravelCharacter;
 import com.bonc.usdp.system.Config;
 import com.bonc.usdp.system.Constants;
-import com.bonc.usdp.util.DistanceUtil;
+import com.bonc.usdp.util.LocationUtils;
 
 public class TravelCharacterDistance implements DistanceMetric<TravelCharacter> {
 
@@ -18,14 +18,14 @@ public class TravelCharacterDistance implements DistanceMetric<TravelCharacter> 
             return Double.MAX_VALUE;
         }
 
-        double desDis = DistanceUtil.getDistance(
+        double desDis = LocationUtils.getDistance(
                 characterAttributeA.getDestination(), characterAttributeB.getDestination());
 
         if (dayGap == 0 && desDis == 0) {
             return 0;
         }
 
-        double originDis = DistanceUtil.getDistance(
+        double originDis = LocationUtils.getDistance(
                 characterAttributeA.getDeparture(), characterAttributeB.getDeparture());
 
         if (originDis > Config.SYSTEM_PARAM_MAXCITYDISTANCE_DEPARTURE
