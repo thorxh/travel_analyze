@@ -9,7 +9,6 @@ public class Constants {
     public static double TRAVEL_TYPE_RATE = 0.1;
     public static double TRAVEL_ORIGIN_RATE = 0.3;
     public static double TRAVEL_DESTINATION_RATE = 0.5;
-    public static String ORIGINAL_TRAVEL_INFORMATION_PATH = "data/plane_travel.txt";
 
     static String CONFIG_FILE_NAME = "config.properties";
 
@@ -20,6 +19,8 @@ public class Constants {
     static String SYSTEM_PARAM_MAXCITYDISTANCE_DESTINATION = "system.param.maxcitydistance.destination";
     static String SYSTEM_PARAM_RECORDLIMIT = "system.param.recordlimit";
     static String SYSTEM_PARAM_THREADSIZE = "system.param.threadsize";
+    static String SYSTEM_PARAM_PATTERN_TIME = "system.param.timepattern";
+    static String SYSTEM_PARAM_PATTERN_DATE = "system.param.datepattern";
 
     static String TRAVEL_TYPE = "travel.type";
 

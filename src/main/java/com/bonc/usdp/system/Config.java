@@ -20,6 +20,8 @@ public class Config {
     public static int SYSTEM_PARAM_THREADSIZE;
     public static int SYSTEM_PARAM_MAXCITYDISTANCE_DEPARTURE;
     public static int SYSTEM_PARAM_MAXCITYDISTANCE_DESTINATION;
+    public static String SYSTEM_PARAM_PATTERN_TIME;
+    public static String SYSTEM_PARAM_PATTERN_DATE;
     public static List<TableInfo> tableInfos;
 
     private static Properties properties = new Properties();
@@ -52,6 +54,9 @@ public class Config {
 
             String recordLimit = properties.getProperty(Constants.SYSTEM_PARAM_RECORDLIMIT, "-1");
             SYSTEM_PARAM_RECORDLIMIT = Integer.parseInt(recordLimit);
+
+            SYSTEM_PARAM_PATTERN_TIME = properties.getProperty(Constants.SYSTEM_PARAM_PATTERN_TIME, "yyyy-MM-dd HH:mm:ss");
+            SYSTEM_PARAM_PATTERN_DATE = properties.getProperty(Constants.SYSTEM_PARAM_PATTERN_DATE, "yyyy-MM-dd");
 
             String trevalTypes = properties.getProperty(Constants.TRAVEL_TYPE);
             if (trevalTypes == null || trevalTypes.isEmpty()) {

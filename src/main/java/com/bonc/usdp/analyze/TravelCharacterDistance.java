@@ -33,6 +33,8 @@ public class TravelCharacterDistance implements DistanceMetric<TravelCharacter> 
             return Double.MAX_VALUE;
         }
 
-        return Constants.TRAVEL_DATE_RATE * dayGap + Constants.TRAVEL_DESTINATION_RATE * desDis / 100;
+        return Constants.TRAVEL_DATE_RATE * dayGap
+                + Constants.TRAVEL_DESTINATION_RATE * desDis / 100
+                + Constants.TRAVEL_ORIGIN_RATE * originDis / 100;
     }
 }

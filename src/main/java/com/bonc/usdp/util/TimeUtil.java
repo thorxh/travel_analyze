@@ -1,5 +1,7 @@
 package com.bonc.usdp.util;
 
+import com.bonc.usdp.system.Config;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -9,8 +11,8 @@ import java.util.Date;
  */
 public class TimeUtil {
 
-    private static SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-    private static SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
+    private static SimpleDateFormat dateFormat = new SimpleDateFormat(Config.SYSTEM_PARAM_PATTERN_DATE);
+    private static SimpleDateFormat timeFormat = new SimpleDateFormat(Config.SYSTEM_PARAM_PATTERN_TIME);
 
     public static Date parseDate(String dateStr) {
         try {
