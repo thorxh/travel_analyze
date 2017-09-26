@@ -26,7 +26,10 @@ public class Clusterer<V extends CharacterHelper> {
      */
     private ArrayList<V> inputValues = null;
 
-    public Clusterer(final Collection<V> inputValues, int minNumElements, double maxDistance, DistanceMetric<V> metric) {
+    public Clusterer(final Collection<V> inputValues,
+                     int minNumElements,
+                     double maxDistance,
+                     DistanceMetric<V> metric) {
         setInputValues(inputValues);
         setMinimalNumberOfMembersForCluster(minNumElements);
         setMaximalDistanceOfClusterMembers(maxDistance);
@@ -64,7 +67,7 @@ public class Clusterer<V extends CharacterHelper> {
      */
     private List<V> getNeighbours(final V inputValue) {
         List<V> neighbours = new LinkedList<>();
-        for (V candidate : inputValues) {
+        for (V candidate :inputValues ) {
             if (metric.calculateDistance(inputValue, candidate) <= epsilon) {
                 neighbours.add(candidate);
             }

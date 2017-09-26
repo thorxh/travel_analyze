@@ -38,7 +38,7 @@ public class Config {
             String maxdaygap = properties.getProperty(Constants.SYSTEM_PARAM_MAXDAYGAP, "7");
             SYSTEM_PARAM_MAXDAYGAP = Integer.parseInt(maxdaygap);
 
-            String threadSize = properties.getProperty(Constants.SYSTEM_PARAM_MAXDAYGAP, "0");
+            String threadSize = properties.getProperty(Constants.SYSTEM_PARAM_THREADSIZE, "0");
             SYSTEM_PARAM_THREADSIZE = Integer.parseInt(threadSize);
             if (SYSTEM_PARAM_THREADSIZE == 0) {
                 SYSTEM_PARAM_THREADSIZE = Runtime.getRuntime().availableProcessors();
