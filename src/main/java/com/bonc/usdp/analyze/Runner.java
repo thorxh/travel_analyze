@@ -6,16 +6,12 @@ import com.bonc.usdp.entity.TravelCharacter;
 import com.bonc.usdp.system.Config;
 import com.bonc.usdp.util.FileUtil;
 import com.bonc.usdp.util.PathUtil;
-import com.sun.glass.ui.Size;
-import sun.awt.image.ImageWatched;
 
-import javax.swing.text.SimpleAttributeSet;
 import java.io.File;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.CountDownLatch;
 
 /**
  * created on 2017/9/21
