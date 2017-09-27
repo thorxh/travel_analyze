@@ -1,5 +1,6 @@
-package com.bonc.usdp.analyze;
+package com.bonc.usdp;
 
+import com.bonc.usdp.analyze.Runner;
 import com.bonc.usdp.util.PathUtil;
 
 /**

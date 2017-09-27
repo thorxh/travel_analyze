@@ -51,7 +51,7 @@
                 <!--<configuration>-->
                     <!--<archive>-->
                         <!--<manifest>-->
-                            <!--<mainClass>com.bonc.usdp.analyze.Main</mainClass>-->
+                            <!--<mainClass>com.bonc.usdp.Main</mainClass>-->
                         <!--</manifest>-->
                     <!--</archive>-->
                 <!--</configuration>-->
@@ -61,7 +61,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>com.bonc.usdp.analyze.Main</mainClass>
+                            <mainClass>com.bonc.usdp.Main</mainClass>
                         </manifest>
                     </archive>
                     <descriptorRefs>
