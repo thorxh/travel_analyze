@@ -10,6 +10,8 @@ public class Constants {
     public static double TRAVEL_ORIGIN_RATE = 0.3;
     public static double TRAVEL_DESTINATION_RATE = 0.5;
 
+    public static double DEGREE_UNIT = Math.PI / 180.0;
+
     static String CONFIG_FILE_NAME = "config.properties";
 
     static String SYSTEM_PARAM_MINCLUSTER = "system.param.mincluster";

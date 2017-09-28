@@ -11,6 +11,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.StringTokenizer;
 
+import com.bonc.usdp.system.Constants;
+
 /**
  * created on 2017/9/26
  *
@@ -25,20 +27,13 @@ public class LocationUtils {
     }
 
     public static double getDistance(String placeOne, String placeTwo) {
-        Area areaOne = getAreaByCounty(placeOne);
-        Area areaTwo = getAreaByCounty(placeTwo);
+        Area areaOne = areaMap.get(placeOne);
+        Area areaTwo = areaMap.get(placeTwo);
         if (areaOne == null || areaTwo == null) {
             System.out.println(areaOne == null ? placeOne : placeTwo + " is not in the area_position.dic");
             return Double.MAX_VALUE;
         }
         return getDistance(areaOne.getLatitude(), areaOne.getLongitude(), areaTwo.getLatitude(), areaTwo.getLongitude());
-    }
-
-    /**
-     * 角度弧度计算
-     */
-    private static double getRadian(double degree) {
-        return degree * Math.PI / 180.0;
     }
 
     /**
@@ -49,15 +44,13 @@ public class LocationUtils {
      * @param lng2 2点的经度
      */
     private static double getDistance(double lat1, double lng1, double lat2, double lng2) {
-        double radLat1 = getRadian(lat1);
-        double radLat2 = getRadian(lat2);
+        double radLat1 = Constants.DEGREE_UNIT * lat1;
+        double radLat2 = Constants.DEGREE_UNIT * lat2;
         double a = radLat1 - radLat2;
-        double b = getRadian(lng1) - getRadian(lng2);
+        double b = Constants.DEGREE_UNIT * (lng1 - lng2);
         double s = 2 * Math.asin(Math.sqrt(Math.pow(Math.sin(a / 2), 2) + Math.cos(radLat1)
                 * Math.cos(radLat2) * Math.pow(Math.sin(b / 2), 2)));
-        double EARTH_RADIUS = 6378.137;
-        s = s * EARTH_RADIUS;
-        return s * 1000;
+        return s * 6378.137 * 1000;
     }
 
     private static void init() {
@@ -72,7 +65,11 @@ public class LocationUtils {
             // 跳过表头
             bufferedSource.readUtf8Line();
             while (!bufferedSource.exhausted()) {
-                Area area = convertToArea(bufferedSource.readUtf8Line());
+                String areaStr = bufferedSource.readUtf8Line();
+                if (areaStr == null || areaStr.isEmpty()) {
+                    continue;
+                }
+                Area area = convertToArea(areaStr);
                 areaMap.put(area.getCounty(), area);
             }
         } catch (IOException e) {
@@ -89,22 +86,6 @@ public class LocationUtils {
         area.setLongitude(Double.parseDouble(st.nextToken()));
         area.setLatitude(Double.parseDouble(st.nextToken()));
         return area;
-    }
-
-    private static Area getAreaByCounty(String county) {
-        if (!county.contains("市") && !county.contains("区") && !county.contains("县")) {
-            Area area = areaMap.get(county + "市");
-            if (area != null) {
-                return area;
-            }
-            area = areaMap.get(county + "区");
-            if (area != null) {
-                return area;
-            }
-            area = areaMap.get(county + "县");
-            return area;
-        }
-        return areaMap.get(county);
     }
 
 }

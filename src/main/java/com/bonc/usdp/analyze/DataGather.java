@@ -22,6 +22,14 @@ class DataGather {
 
     private TableInfo tableInfo;
 
+    private List<String> suffixList = new LinkedList<String>() {
+        {
+            add("市");
+            add("县");
+            add("区");
+        }
+    };
+
     DataGather(TableInfo tableInfo) {
         this.tableInfo = tableInfo;
     }
@@ -58,8 +66,8 @@ class DataGather {
                 travelCharacter.setTravellerId(resultSet.getString(tableInfo.getTravellerIdField()));
                 travelCharacter.setTrafficNumber(resultSet.getString(tableInfo.getTrafficNumberField()));
                 travelCharacter.setTravelDate(TimeUtil.parseDate(resultSet.getString(tableInfo.getTravelDateField())));
-                travelCharacter.setDeparture(resultSet.getString(tableInfo.getDepartureField()));
-                travelCharacter.setDestination(resultSet.getString(tableInfo.getDestinationField()));
+                travelCharacter.setDeparture(cityNameNormalize(resultSet.getString(tableInfo.getDepartureField())));
+                travelCharacter.setDestination(cityNameNormalize(resultSet.getString(tableInfo.getDestinationField())));
                 travelCharacter.setDepartureTime(TimeUtil.parseTime(resultSet.getString(tableInfo.getDepartureTimeField())));
                 travelCharacter.setArrivalTime(TimeUtil.parseTime(resultSet.getString(tableInfo.getArrivalTimeField())));
                 travelCharacterList.add(travelCharacter);
@@ -85,6 +93,18 @@ class DataGather {
         fieldList.add(tableInfo.getArrivalTimeField());
         fieldList.add(tableInfo.getTravelDateField());
         return fieldList;
+    }
+
+    private String cityNameNormalize(String name) {
+        if (name == null || name.length() <= 2) {
+            return name;
+        }
+        for (String suffix : suffixList) {
+            if (name.contains(suffix)) {
+                return name.substring(0, name.length() - suffix.length());
+            }
+        }
+        return name;
     }
 
 }
