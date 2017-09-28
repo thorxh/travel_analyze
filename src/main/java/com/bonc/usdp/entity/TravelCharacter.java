@@ -14,6 +14,7 @@ public class TravelCharacter extends CharacterHelper {
     private String travellerId;
     private Date travelDate;
     private String travelType;
+    private String companyName;
     private String trafficNumber;
     private String departure;
     private String destination;
@@ -26,6 +27,7 @@ public class TravelCharacter extends CharacterHelper {
                 travellerId + " " +
                 TimeUtil.formatDate(travelDate) + " " +
                 travelType + " " +
+                companyName + " " +
                 trafficNumber + " " +
                 departure + " " +
                 destination + " " +

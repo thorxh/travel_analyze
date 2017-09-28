@@ -7,22 +7,33 @@ public class Constants {
 
     public static double TRAVEL_DATE_RATE = 0.5;
     public static double TRAVEL_TYPE_RATE = 0.1;
-    public static double TRAVEL_ORIGIN_RATE = 0.3;
-    public static double TRAVEL_DESTINATION_RATE = 0.5;
+    public static double TRAVEL_DESTINATION_RATE = 0.4;
+    public static double TRAVEL_ORIGIN_RATE = 0.1;
 
     public static double DEGREE_UNIT = Math.PI / 180.0;
+    public static long ONE_DAY_MILLISECOND = 86400000;
 
     static String CONFIG_FILE_NAME = "config.properties";
 
     static String SYSTEM_PARAM_MINCLUSTER = "system.param.mincluster";
     static String SYSTEM_PARAM_MAXDISTANCE = "system.param.maxdistance";
     static String SYSTEM_PARAM_MAXDAYGAP = "system.param.maxdaygap";
+    static String SYSTEM_PARAM_CHARACTER_SWITCH = "system.param.character.switch";
     static String SYSTEM_PARAM_MAXCITYDISTANCE_DEPARTURE = "system.param.maxcitydistance.departure";
     static String SYSTEM_PARAM_MAXCITYDISTANCE_DESTINATION = "system.param.maxcitydistance.destination";
     static String SYSTEM_PARAM_RECORDLIMIT = "system.param.recordlimit";
     static String SYSTEM_PARAM_THREADSIZE = "system.param.threadsize";
     static String SYSTEM_PARAM_PATTERN_TIME = "system.param.timepattern";
     static String SYSTEM_PARAM_PATTERN_DATE = "system.param.datepattern";
+
+    static String SYSTEM_RATE_TRAVELDATE = "system.rate.traveldate";
+    static String SYSTEM_RATE_TRAVELTYPE = "system.rate.traveltype";
+    static String SYSTEM_RATE_COMPANYNAME = "system.rate.companyname";
+    static String SYSTEM_RATE_TRAFFICNUMBER = "system.rate.trafficnumber";
+    static String SYSTEM_RATE_DEPARTURE = "system.rate.departure";
+    static String SYSTEM_RATE_DESTINATION = "system.rate.destination";
+    static String SYSTEM_RATE_DEPARTURETIME = "system.rate.departuretime";
+    static String SYSTEM_RATE_ARRIVALTIME = "system.rate.arrivaltime";
 
     static String TRAVEL_TYPE = "travel.type";
 

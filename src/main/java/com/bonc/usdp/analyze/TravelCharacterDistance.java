@@ -37,4 +37,9 @@ public class TravelCharacterDistance implements DistanceMetric<TravelCharacter> 
                 + Constants.TRAVEL_DESTINATION_RATE * desDis / 100
                 + Constants.TRAVEL_ORIGIN_RATE * originDis / 100;
     }
+
+    @Override
+    public boolean check(TravelCharacter val1, TravelCharacter val2) {
+        return false;
+    }
 }

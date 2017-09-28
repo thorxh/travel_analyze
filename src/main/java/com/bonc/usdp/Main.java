@@ -24,12 +24,6 @@ public class Main {
             }
         }
         new Runner().run();
-        System.err.println("done");
-        try {
-            TimeUnit.MINUTES.sleep(50);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
     }
 
 }

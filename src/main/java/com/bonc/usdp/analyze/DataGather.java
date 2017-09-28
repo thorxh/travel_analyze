@@ -65,6 +65,7 @@ class DataGather {
                 travelCharacter.setTravellerName(resultSet.getString(tableInfo.getTravellerNameField()));
                 travelCharacter.setTravellerId(resultSet.getString(tableInfo.getTravellerIdField()));
                 travelCharacter.setTrafficNumber(resultSet.getString(tableInfo.getTrafficNumberField()));
+                travelCharacter.setCompanyName(resultSet.getString(tableInfo.getCompanyNameField()));
                 travelCharacter.setTravelDate(TimeUtil.parseDate(resultSet.getString(tableInfo.getTravelDateField())));
                 travelCharacter.setDeparture(cityNameNormalize(resultSet.getString(tableInfo.getDepartureField())));
                 travelCharacter.setDestination(cityNameNormalize(resultSet.getString(tableInfo.getDestinationField())));

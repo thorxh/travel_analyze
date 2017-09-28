@@ -17,11 +17,22 @@ public class Config {
     public static double SYSTEM_PARAM_MAXDISTANCE;
     public static int SYSTEM_PARAM_RECORDLIMIT;
     public static int SYSTEM_PARAM_MAXDAYGAP;
+    public static String SYSTEM_PARAM_CHARACTER_SWITCH;
     public static int SYSTEM_PARAM_THREADSIZE;
     public static int SYSTEM_PARAM_MAXCITYDISTANCE_DEPARTURE;
     public static int SYSTEM_PARAM_MAXCITYDISTANCE_DESTINATION;
     public static String SYSTEM_PARAM_PATTERN_TIME;
     public static String SYSTEM_PARAM_PATTERN_DATE;
+
+    public static double SYSTEM_RATE_TRAVELDATE;
+    public static double SYSTEM_RATE_TRAVELTYPE;
+    public static double SYSTEM_RATE_COMPANYNAME;
+    public static double SYSTEM_RATE_TRAFFICNUMBER;
+    public static double SYSTEM_RATE_DEPARTURE;
+    public static double SYSTEM_RATE_DESTINATION;
+    public static double SYSTEM_RATE_DEPARTURETIME;
+    public static double SYSTEM_RATE_ARRIVALTIME;
+
     public static List<TableInfo> tableInfos;
 
     private static Properties properties = new Properties();
@@ -36,6 +47,9 @@ public class Config {
 
             String maxDistance = properties.getProperty(Constants.SYSTEM_PARAM_MAXDISTANCE, "1");
             SYSTEM_PARAM_MAXDISTANCE = Double.parseDouble(maxDistance);
+
+            SYSTEM_PARAM_CHARACTER_SWITCH = properties.getProperty(Constants.SYSTEM_PARAM_CHARACTER_SWITCH,
+                    "travel_date,departure,destination");
 
             String maxdaygap = properties.getProperty(Constants.SYSTEM_PARAM_MAXDAYGAP, "7");
             SYSTEM_PARAM_MAXDAYGAP = Integer.parseInt(maxdaygap);
@@ -57,6 +71,24 @@ public class Config {
 
             SYSTEM_PARAM_PATTERN_TIME = properties.getProperty(Constants.SYSTEM_PARAM_PATTERN_TIME, "yyyy-MM-dd HH:mm:ss");
             SYSTEM_PARAM_PATTERN_DATE = properties.getProperty(Constants.SYSTEM_PARAM_PATTERN_DATE, "yyyy-MM-dd");
+
+            String systemRateTraveldate = properties.getProperty(Constants.SYSTEM_RATE_TRAVELDATE, ".0.2");
+            String systemRateTraveltype = properties.getProperty(Constants.SYSTEM_RATE_TRAVELTYPE, ".0.1");
+            String systemRateCompanyname = properties.getProperty(Constants.SYSTEM_RATE_COMPANYNAME, ".0.1");
+            String systemRateTrafficnumber = properties.getProperty(Constants.SYSTEM_RATE_TRAFFICNUMBER, ".0.1");
+            String systemRateDeparture = properties.getProperty(Constants.SYSTEM_RATE_DEPARTURE, ".0.1");
+            String systemRateDestination = properties.getProperty(Constants.SYSTEM_RATE_DESTINATION, ".0.2");
+            String systemRateDeparturetime = properties.getProperty(Constants.SYSTEM_RATE_DEPARTURETIME, ".0.1");
+            String systemRateArrivaltime = properties.getProperty(Constants.SYSTEM_RATE_ARRIVALTIME, ".0.1");
+
+            SYSTEM_RATE_TRAVELDATE = Double.parseDouble(systemRateTraveldate);
+            SYSTEM_RATE_TRAVELTYPE = Double.parseDouble(systemRateTraveltype);
+            SYSTEM_RATE_COMPANYNAME = Double.parseDouble(systemRateCompanyname);
+            SYSTEM_RATE_TRAFFICNUMBER = Double.parseDouble(systemRateTrafficnumber);
+            SYSTEM_RATE_DEPARTURE = Double.parseDouble(systemRateDeparture);
+            SYSTEM_RATE_DESTINATION = Double.parseDouble(systemRateDestination);
+            SYSTEM_RATE_DEPARTURETIME = Double.parseDouble(systemRateDeparturetime);
+            SYSTEM_RATE_ARRIVALTIME = Double.parseDouble(systemRateArrivaltime);
 
             String trevalTypes = properties.getProperty(Constants.TRAVEL_TYPE);
             if (trevalTypes == null || trevalTypes.isEmpty()) {

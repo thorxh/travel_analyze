@@ -2,45 +2,36 @@ package com.bonc.usdp.algorithm.dbscan;
 
 import com.bonc.usdp.entity.CharacterHelper;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.LinkedList;
+import java.util.List;
 
 public class Clusterer<V extends CharacterHelper> {
 
-    /**
-     * maximum distance of values to be considered as cluster
-     */
     private double epsilon = 1f;
 
-    /**
-     * minimum number of members to consider cluster
-     */
     private int minimumNumberOfClusterMembers = 2;
 
-    /**
-     * distance metric applied for clustering
-     */
-    private DistanceMetric<V> metric = null;
+    private List<DistanceMetric<V>> metrics;
 
-    /**
-     * internal list of input values to be clustered
-     */
     private ArrayList<V> inputValues = null;
 
     public Clusterer(final Collection<V> inputValues,
                      int minNumElements,
                      double maxDistance,
-                     DistanceMetric<V> metric) {
+                     List<DistanceMetric<V>> metrics) {
         setInputValues(inputValues);
         setMinimalNumberOfMembersForCluster(minNumElements);
         setMaximalDistanceOfClusterMembers(maxDistance);
-        setDistanceMetric(metric);
+        setDistanceMetrics(metrics);
     }
 
-    private void setDistanceMetric(final DistanceMetric<V> metric) {
-        if (metric == null) {
-            throw new ClustererException("Distance metric has not been specified (null).");
+    private void setDistanceMetrics(final List<DistanceMetric<V>> metrics) {
+        if (metrics == null) {
+            throw new ClustererException("Distance metric list is empty.");
         }
-        this.metric = metric;
+        this.metrics = metrics;
     }
 
     private void setInputValues(final Collection<V> collection) {
@@ -59,16 +50,12 @@ public class Clusterer<V extends CharacterHelper> {
     }
 
     /**
-     * Determines the neighbours of a given input value.
-     *
-     * @param inputValue Input value for which neighbours are to be determined
-     * @return list of neighbours
-     * @throws ClustererException ClustererException
+     * 计算邻居
      */
     private List<V> getNeighbours(final V inputValue) {
         List<V> neighbours = new LinkedList<>();
         for (V candidate :inputValues ) {
-            if (metric.calculateDistance(inputValue, candidate) <= epsilon) {
+            if (calculateDistance(inputValue, candidate) <= epsilon) {
                 neighbours.add(candidate);
             }
         }
@@ -76,12 +63,22 @@ public class Clusterer<V extends CharacterHelper> {
     }
 
     /**
-     * Merges the elements of the right collection to the left one and returns
-     * the combination.
-     *
-     * @param neighbours1 left collection
-     * @param neighbours2 right collection
-     * @return Modified left collection
+     * 计算距离
+     */
+    private double calculateDistance(V val1, V val2) {
+        double distance = 0.0;
+        for (DistanceMetric<V> metric : metrics) {
+            if (metric.check(val1, val2)) {
+                distance += metric.calculateDistance(val1, val2);
+            } else {
+                return Double.MAX_VALUE;
+            }
+        }
+        return distance;
+    }
+
+    /**
+     * 合并邻居
      */
     private List<V> mergeRightToLeftCollection(final List<V> neighbours1,
                                                final List<V> neighbours2) {
@@ -95,11 +92,7 @@ public class Clusterer<V extends CharacterHelper> {
     }
 
     /**
-     * Applies the clustering and returns a collection of clusters (i.e. a list
-     * of lists of the respective cluster members).
-     *
-     * @return a collection of clusters
-     * @throws ClustererException ClustererException
+     * 聚类计算
      */
     public List<List<V>> performClustering() {
 
