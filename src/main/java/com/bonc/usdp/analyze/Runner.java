@@ -6,6 +6,7 @@ import com.bonc.usdp.algorithm.dbscan.distance.*;
 import com.bonc.usdp.entity.TableInfo;
 import com.bonc.usdp.entity.TravelCharacter;
 import com.bonc.usdp.system.Config;
+import com.bonc.usdp.util.DistanceUtils;
 import com.bonc.usdp.util.FileUtil;
 import com.bonc.usdp.util.PathUtil;
 
@@ -32,6 +33,10 @@ public class Runner {
         // no data
         if (characterAttributeList.isEmpty()) {
             return;
+        }
+
+        if (characterAttributeList.size() > 1000) {
+            DistanceUtils.setDistanceCalType(DistanceUtils.DistanceCalType.ByCityDistance);
         }
 
         long start = System.currentTimeMillis();

@@ -3,7 +3,7 @@ package com.bonc.usdp.algorithm.dbscan.distance;
 import com.bonc.usdp.algorithm.dbscan.DistanceMetric;
 import com.bonc.usdp.entity.TravelCharacter;
 import com.bonc.usdp.system.Config;
-import com.bonc.usdp.util.LocationUtils;
+import com.bonc.usdp.util.DistanceUtils;
 
 /**
  * created on 2017/9/28
@@ -29,7 +29,7 @@ public class DepartureDistance implements DistanceMetric<TravelCharacter> {
     }
 
     private double cal(TravelCharacter val1, TravelCharacter val2) {
-        return LocationUtils.getDistance(val1.getDeparture(), val2.getDeparture());
+        return DistanceUtils.getDistance(val1.getDeparture(), val2.getDeparture());
     }
 
 }

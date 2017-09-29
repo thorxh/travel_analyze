@@ -5,11 +5,6 @@ package com.bonc.usdp.system;
  */
 public class Constants {
 
-    public static double TRAVEL_DATE_RATE = 0.5;
-    public static double TRAVEL_TYPE_RATE = 0.1;
-    public static double TRAVEL_DESTINATION_RATE = 0.4;
-    public static double TRAVEL_ORIGIN_RATE = 0.1;
-
     public static double DEGREE_UNIT = Math.PI / 180.0;
     public static long ONE_DAY_MILLISECOND = 86400000;
 

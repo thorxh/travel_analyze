@@ -3,8 +3,6 @@ package com.bonc.usdp;
 import com.bonc.usdp.analyze.Runner;
 import com.bonc.usdp.util.PathUtil;
 
-import java.util.concurrent.TimeUnit;
-
 /**
  * created on 2017/9/21
  *
@@ -23,6 +21,7 @@ public class Main {
                 PathUtil.setConfigPath(configPath);
             }
         }
+
         new Runner().run();
     }
 
