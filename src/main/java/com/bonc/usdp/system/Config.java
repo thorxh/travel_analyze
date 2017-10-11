@@ -24,6 +24,9 @@ public class Config {
     public static String SYSTEM_PARAM_PATTERN_TIME;
     public static String SYSTEM_PARAM_PATTERN_DATE;
 
+    public static int SYSTEM_PARAM_MIN_SUP;
+    public static int SYSTEM_PARAM_MIN_PARTNER_NUM;
+
     public static double SYSTEM_RATE_TRAVELDATE;
     public static double SYSTEM_RATE_TRAVELTYPE;
     public static double SYSTEM_RATE_COMPANYNAME;
@@ -68,6 +71,11 @@ public class Config {
 
             String recordLimit = properties.getProperty(Constants.SYSTEM_PARAM_RECORDLIMIT, "-1");
             SYSTEM_PARAM_RECORDLIMIT = Integer.parseInt(recordLimit);
+
+            String minSup = properties.getProperty(Constants.SYSTEM_PARAM_MIN_SUP, "2");
+            SYSTEM_PARAM_MIN_SUP = Integer.parseInt(minSup);
+            String minPartnerNum = properties.getProperty(Constants.SYSTEM_PARAM_MIN_PARTNER_NUM, "2");
+            SYSTEM_PARAM_MIN_PARTNER_NUM = Integer.parseInt(minPartnerNum);
 
             SYSTEM_PARAM_PATTERN_TIME = properties.getProperty(Constants.SYSTEM_PARAM_PATTERN_TIME, "yyyy-MM-dd HH:mm:ss");
             SYSTEM_PARAM_PATTERN_DATE = properties.getProperty(Constants.SYSTEM_PARAM_PATTERN_DATE, "yyyy-MM-dd");

@@ -21,6 +21,9 @@ public class Constants {
     static String SYSTEM_PARAM_PATTERN_TIME = "system.param.timepattern";
     static String SYSTEM_PARAM_PATTERN_DATE = "system.param.datepattern";
 
+    static String SYSTEM_PARAM_MIN_SUP = "system.param.minsup";
+    static String SYSTEM_PARAM_MIN_PARTNER_NUM = "system.param.minpartnernum";
+
     static String SYSTEM_RATE_TRAVELDATE = "system.rate.traveldate";
     static String SYSTEM_RATE_TRAVELTYPE = "system.rate.traveltype";
     static String SYSTEM_RATE_COMPANYNAME = "system.rate.companyname";

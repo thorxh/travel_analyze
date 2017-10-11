@@ -165,9 +165,9 @@ public class FPGpgrowth {
                 mineTree(condPattern, minSup, newFreqList, freqItemList, flag + 1);
             }
         }
-        if (flag == 0) {
-            fpgEntity.getRootNode().disp(0);
-        }
+//        if (flag == 0) {
+//            fpgEntity.getRootNode().disp(0);
+//        }
     }
 
     private List<String> sortByOccurTime(Map<String, Integer> elementMap) {

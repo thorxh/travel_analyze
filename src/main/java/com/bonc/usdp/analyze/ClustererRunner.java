@@ -11,10 +11,7 @@ import com.bonc.usdp.util.FileUtil;
 import com.bonc.usdp.util.PathUtil;
 
 import java.io.File;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -24,7 +21,7 @@ import java.util.stream.Collectors;
  */
 public class ClustererRunner {
 
-    public void run() {
+    public List<List<TravelCharacter>> run() {
         List<TravelCharacter> characterAttributeList = new LinkedList<>();
 
         for (TableInfo tableInfo : Config.tableInfos) {
@@ -33,7 +30,7 @@ public class ClustererRunner {
 
         // no data
         if (characterAttributeList.isEmpty()) {
-            return;
+            return Collections.emptyList();
         }
 
         if (characterAttributeList.size() > 1000) {
@@ -72,6 +69,7 @@ public class ClustererRunner {
         statisticsMap.put("record size", String.valueOf(characterAttributeList.size()));
         statisticsMap.put("total time", String.format("%sh %sm %ss", hour, minute, second));
         FileUtil.writeMap(PathUtil.getOutPath() + File.separator + "statistics.txt", statisticsMap);
+        return results;
     }
 
     private List<DistanceMetric<TravelCharacter>> getDistanceMetrics() {
