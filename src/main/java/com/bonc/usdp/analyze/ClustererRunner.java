@@ -15,13 +15,14 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * created on 2017/9/21
  *
  * @author liyanjun@bonc.com.cn
  */
-public class Runner {
+public class ClustererRunner {
 
     public void run() {
         List<TravelCharacter> characterAttributeList = new LinkedList<>();
@@ -55,6 +56,13 @@ public class Runner {
         for (int i = 0; i < results.size(); i++) {
             FileUtil.writeList(PathUtil.getOutPath() + File.separator + i + ".txt", results.get(i));
         }
+
+        List<String> idGroups = new LinkedList<>();
+        results.forEach( result -> {
+            List<String> ids = result.stream().map(TravelCharacter::getTravellerId).collect(Collectors.toList());
+            idGroups.add(String.join(" ", ids));
+        });
+        FileUtil.writeList(PathUtil.getOutPath() + File.separator + "id_groups.txt", idGroups);
 
         long time = end - start;
         int hour = (int) (time / (1000 * 60 * 60));

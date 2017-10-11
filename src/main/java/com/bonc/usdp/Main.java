@@ -1,6 +1,7 @@
 package com.bonc.usdp;
 
-import com.bonc.usdp.analyze.Runner;
+import com.bonc.usdp.analyze.ClustererRunner;
+import com.bonc.usdp.analyze.FPGpgrowthRunner;
 import com.bonc.usdp.util.PathUtil;
 
 /**
@@ -22,7 +23,8 @@ public class Main {
             }
         }
 
-        new Runner().run();
+//        new ClustererRunner().run();
+        new FPGpgrowthRunner().run();
     }
 
 }

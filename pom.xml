@@ -61,7 +61,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>com.bonc.usdp.Main</mainClass>
+                            <mainClass>com.bonc.usdp.algorithm.fpgrowth.FPGpgrowth</mainClass>
                         </manifest>
                     </archive>
                     <descriptorRefs>
