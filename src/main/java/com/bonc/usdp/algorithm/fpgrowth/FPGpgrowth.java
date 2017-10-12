@@ -2,9 +2,7 @@ package com.bonc.usdp.algorithm.fpgrowth;
 
 import com.bonc.usdp.algorithm.fpgrowth.entity.FPGEntity;
 import com.bonc.usdp.algorithm.fpgrowth.entity.TreeNode;
-import com.bonc.usdp.util.FileUtil;
 
-import java.io.File;
 import java.util.*;
 
 /**
@@ -142,8 +140,7 @@ public class FPGpgrowth {
         }
     }
 
-    public void mineTree(List<List<String>> dataSet, int minSup, List<String> preFix, List<List<String> > freqItemList, int f) {
-        int flag = f;
+    public void mineTree(List<List<String>> dataSet, int minSup, List<String> preFix, List<List<String> > freqItemList) {
         FPGEntity fpgEntity = createTree(dataSet, minSup);
         if (fpgEntity.getElementMap().isEmpty()) {
             return;
@@ -157,17 +154,11 @@ public class FPGpgrowth {
             if (condPattern.isEmpty()) {
                 continue;
             }
-//            if (flag == 0) {
-//                System.err.println(flag + " " + element + " - " + condPattern);
-//            }
             FPGEntity fpg = createTree(condPattern, minSup);
             if (!fpg.getElementMap().isEmpty()) {
-                mineTree(condPattern, minSup, newFreqList, freqItemList, flag + 1);
+                mineTree(condPattern, minSup, newFreqList, freqItemList);
             }
         }
-//        if (flag == 0) {
-//            fpgEntity.getRootNode().disp(0);
-//        }
     }
 
     private List<String> sortByOccurTime(Map<String, Integer> elementMap) {
