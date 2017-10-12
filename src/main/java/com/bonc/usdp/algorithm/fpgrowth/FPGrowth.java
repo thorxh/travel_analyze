@@ -8,10 +8,10 @@ import java.util.*;
 
 /**
  * created on 2017/9/30 <br>
- *    使用 FPGpgrowth 算法进行频繁项集挖掘
+ *    使用 FPGrowth 算法进行频繁项集挖掘
  * @author liyanjun@bonc.com.cn
  */
-public class FPGpgrowth {
+public class FPGrowth {
 
     /**
      * 数据挖掘

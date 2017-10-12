@@ -1,19 +1,15 @@
 package com.bonc.usdp;
 
 import com.bonc.usdp.algorithm.fpgrowth.entity.FreqPattern;
-import com.bonc.usdp.analyze.ClustererRunner;
-import com.bonc.usdp.analyze.FPGpgrowthRunner;
-import com.bonc.usdp.entity.TravelCharacter;
+import com.bonc.usdp.analyze.FPGrowthRunner;
 import com.bonc.usdp.system.Config;
 import com.bonc.usdp.util.FileUtil;
 import com.bonc.usdp.util.PathUtil;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * created on 2017/9/21
@@ -52,7 +48,7 @@ public class Main {
             rawData.add(stringList);
         }
 
-        List<FreqPattern> mineResult = new FPGpgrowthRunner(rawData, Config.SYSTEM_PARAM_MIN_SUP).run();
+        List<FreqPattern> mineResult = new FPGrowthRunner(rawData, Config.SYSTEM_PARAM_MIN_SUP).run();
         mineResult.removeIf(result -> result.getPatternList().size() < Config.SYSTEM_PARAM_MIN_PARTNER_NUM);
 
         List<String> outList = new LinkedList<>();
