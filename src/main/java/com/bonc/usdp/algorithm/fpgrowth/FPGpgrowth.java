@@ -1,6 +1,7 @@
 package com.bonc.usdp.algorithm.fpgrowth;
 
 import com.bonc.usdp.algorithm.fpgrowth.entity.FPGEntity;
+import com.bonc.usdp.algorithm.fpgrowth.entity.FreqPattern;
 import com.bonc.usdp.algorithm.fpgrowth.entity.TreeNode;
 
 import java.util.*;
@@ -15,19 +16,20 @@ public class FPGpgrowth {
     /**
      * 数据挖掘
      */
-    public void mine(List<List<String>> dataSet, int minSup, List<String> preFix, List<List<String> > freqPatternList) {
+    public void mine(List<List<String>> dataSet, int minSup, List<String> preFix, List<FreqPattern> freqPatternList) {
         if (dataSet == null || dataSet.isEmpty()) {
             throw new FPGrowthExp("no data");
         }
         FPGEntity fpgEntity = createTree(dataSet, minSup);
-        if (fpgEntity.getElementMap().isEmpty()) {
+        Map<String, Integer> elementMap = fpgEntity.getElementMap();
+        if (elementMap.isEmpty()) {
             return;
         }
-        List<String> elements = sortByOccurTime(fpgEntity.getElementMap());
+        List<String> elements = sortByOccurTime(elementMap);
         for (String element : elements) {
             List<String> newFreqList = new LinkedList<>(preFix);
             newFreqList.add(element);
-            freqPatternList.add(newFreqList);
+            freqPatternList.add(new FreqPattern(newFreqList, elementMap.get(element)));
             List<List<String>> condPattern =
                     getCondPattern(fpgEntity.getNodeLinkMap().get(element), fpgEntity.getRootNode());
             if (condPattern.isEmpty()) {
@@ -47,6 +49,7 @@ public class FPGpgrowth {
         FPGEntity fpgEntity = new FPGEntity(inputValues, minSup);
         preProccess(fpgEntity);
         buildFPTree(fpgEntity);
+        // FPTree 构建完成后释放内存
         fpgEntity.setInputValues(null);
         return fpgEntity;
     }

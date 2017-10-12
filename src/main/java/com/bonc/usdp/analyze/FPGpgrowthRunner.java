@@ -1,6 +1,7 @@
 package com.bonc.usdp.analyze;
 
 import com.bonc.usdp.algorithm.fpgrowth.FPGpgrowth;
+import com.bonc.usdp.algorithm.fpgrowth.entity.FreqPattern;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -21,10 +22,10 @@ public class FPGpgrowthRunner {
         this.minSup = minSup;
     }
 
-    public List<List<String>> run() {
+    public List<FreqPattern> run() {
         FPGpgrowth fpGpgrowth = new FPGpgrowth();
         List<String> freqlist = new LinkedList<>();
-        List<List<String>> freqItemList = new LinkedList<>();
+        List<FreqPattern> freqItemList = new LinkedList<>();
         fpGpgrowth.mine(rawData, minSup, freqlist, freqItemList);
         return freqItemList;
     }

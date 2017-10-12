@@ -1,5 +1,6 @@
 package com.bonc.usdp;
 
+import com.bonc.usdp.algorithm.fpgrowth.entity.FreqPattern;
 import com.bonc.usdp.analyze.ClustererRunner;
 import com.bonc.usdp.analyze.FPGpgrowthRunner;
 import com.bonc.usdp.entity.TravelCharacter;
@@ -51,13 +52,13 @@ public class Main {
             rawData.add(stringList);
         }
 
-        List<List<String>> mineResult = new FPGpgrowthRunner(rawData, Config.SYSTEM_PARAM_MIN_SUP).run();
-        mineResult.removeIf(result -> result.size() < Config.SYSTEM_PARAM_MIN_PARTNER_NUM);
+        List<FreqPattern> mineResult = new FPGpgrowthRunner(rawData, Config.SYSTEM_PARAM_MIN_SUP).run();
+        mineResult.removeIf(result -> result.getPatternList().size() < Config.SYSTEM_PARAM_MIN_PARTNER_NUM);
 
         List<String> outList = new LinkedList<>();
         mineResult.forEach(itemList -> {
-            itemList.sort(String::compareTo);
-            outList.add(String.join(" ", itemList));
+            itemList.getPatternList().sort(String::compareTo);
+            outList.add(itemList.getFrequency() + " " + String.join(" ", itemList.getPatternList()));
         });
         outList.sort(String::compareTo);
         FileUtil.writeList("G:\\WorkSpace\\Idea\\travel-analyze\\result" + File.separator + "out.txt", outList);

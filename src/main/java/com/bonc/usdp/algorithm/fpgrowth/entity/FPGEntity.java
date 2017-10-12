@@ -35,7 +35,7 @@ public class FPGEntity {
     /**
      * 最小支持度
      */
-    private int minSup = 3;
+    private int minSup;
     /**
      * FPTree 根节点
      */
@@ -45,4 +45,5 @@ public class FPGEntity {
         this.inputValues = inputValues;
         this.minSup = minSup;
     }
+
 }

@@ -1,11 +1,14 @@
 package com.bonc.usdp.algorithm.fpgrowth.entity;
 
+import com.bonc.usdp.algorithm.fpgrowth.FPGrowthExp;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * created on 2017/9/29
@@ -21,6 +24,7 @@ public class TreeNode {
     private int count;
     private TreeNode parent;
     private List<TreeNode> children = new LinkedList<>();
+    private Map<String, TreeNode> childrenMap = new HashMap<>();
 
     public TreeNode(String value, int count, TreeNode parent) {
         if (value == null) {
@@ -33,15 +37,15 @@ public class TreeNode {
 
     public void addChild(TreeNode child) {
         children.add(child);
+        String value = child.getValue();
+        if (childrenMap.get(value) != null) {
+            throw new FPGrowthExp(String.format("child %s existed, this should not happen, check your code logic", value));
+        }
+        childrenMap.put(value, child);
     }
 
     public TreeNode getChild(String value) {
-        for (TreeNode child : children) {
-            if (child.value.equals(value)) {
-                return child;
-            }
-        }
-        return null;
+        return childrenMap.get(value);
     }
 
     public void inc() {

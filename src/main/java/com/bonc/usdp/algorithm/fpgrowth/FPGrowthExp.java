@@ -7,7 +7,7 @@ package com.bonc.usdp.algorithm.fpgrowth;
  */
 public class FPGrowthExp extends RuntimeException {
 
-    FPGrowthExp(String msg) {
+    public FPGrowthExp(String msg) {
         super(msg);
     }
 
