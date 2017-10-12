@@ -29,14 +29,14 @@ public class Clusterer<V extends CharacterHelper> {
 
     private void setDistanceMetrics(final List<DistanceMetric<V>> metrics) {
         if (metrics == null) {
-            throw new ClustererException("Distance metric list is empty.");
+            throw new ClustererExp("Distance metric list is empty.");
         }
         this.metrics = metrics;
     }
 
     private void setInputValues(final Collection<V> collection) {
         if (collection == null) {
-            throw new ClustererException("List of input values is null.");
+            throw new ClustererExp("List of input values is null.");
         }
         this.inputValues = new ArrayList<>(collection);
     }
@@ -97,25 +97,25 @@ public class Clusterer<V extends CharacterHelper> {
     public List<List<V>> performClustering() {
 
         if (inputValues == null) {
-            throw new ClustererException("List of input values is null.");
+            throw new ClustererExp("List of input values is null.");
         }
 
         if (inputValues.isEmpty()) {
-            throw new ClustererException("List of input values is empty.");
+            throw new ClustererExp("List of input values is empty.");
         }
 
         if (inputValues.size() < 2) {
-            throw new ClustererException("Less than two input values cannot be clustered. Number of input values: "
+            throw new ClustererExp("Less than two input values cannot be clustered. Number of input values: "
                     + inputValues.size());
         }
 
         if (epsilon < 0) {
-            throw new ClustererException("Maximum distance of input values cannot be negative. Current value: "
+            throw new ClustererExp("Maximum distance of input values cannot be negative. Current value: "
                     + epsilon);
         }
 
 		if (minimumNumberOfClusterMembers < 2) {
-			throw new ClustererException("Clusters with less than 2 members don't make sense. Current value: "
+			throw new ClustererExp("Clusters with less than 2 members don't make sense. Current value: "
                     + minimumNumberOfClusterMembers);
 		}
 

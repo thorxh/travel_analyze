@@ -33,10 +33,6 @@ public class FPGEntity {
      */
     private Map<String, List<TreeNode>> nodeLinkMap = new HashMap<>();
     /**
-     * 出现次数小于最小支持度的频繁项
-     */
-    private List<String> excludeKeys = new LinkedList<>();
-    /**
      * 最小支持度
      */
     private int minSup = 3;

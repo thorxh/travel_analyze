@@ -25,7 +25,7 @@ public class FPGpgrowthRunner {
         FPGpgrowth fpGpgrowth = new FPGpgrowth();
         List<String> freqlist = new LinkedList<>();
         List<List<String>> freqItemList = new LinkedList<>();
-        fpGpgrowth.mineTree(rawData, minSup, freqlist, freqItemList);
+        fpGpgrowth.mine(rawData, minSup, freqlist, freqItemList);
         return freqItemList;
     }
 
