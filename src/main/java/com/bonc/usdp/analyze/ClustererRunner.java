@@ -22,6 +22,7 @@ import java.util.stream.Collectors;
 public class ClustererRunner {
 
     public List<List<TravelCharacter>> run() {
+        System.out.println("start cluster (DBScan) ...");
         List<TravelCharacter> characterAttributeList = new LinkedList<>();
 
         for (TableInfo tableInfo : Config.tableInfos) {
@@ -49,7 +50,7 @@ public class ClustererRunner {
 
         long end = System.currentTimeMillis();
 
-        FileUtil.cleanDir(PathUtil.getOutPath());
+        FileUtil.deleteFileOrDir(PathUtil.getOutPath());
         for (int i = 0; i < results.size(); i++) {
             FileUtil.writeList(PathUtil.getOutPath() + File.separator + i + ".txt", results.get(i));
         }
@@ -69,6 +70,7 @@ public class ClustererRunner {
         statisticsMap.put("record size", String.valueOf(characterAttributeList.size()));
         statisticsMap.put("total time", String.format("%sh %sm %ss", hour, minute, second));
         FileUtil.writeMap(PathUtil.getOutPath() + File.separator + "statistics.txt", statisticsMap);
+        System.out.println("cluster done (DBScan)");
         return results;
     }
 

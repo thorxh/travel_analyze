@@ -1,8 +1,13 @@
 package com.bonc.usdp.analyze;
 
 import com.bonc.usdp.algorithm.fpgrowth.FPGrowth;
+import com.bonc.usdp.algorithm.fpgrowth.api.impl.FileResultProcessor;
 import com.bonc.usdp.algorithm.fpgrowth.entity.FreqPattern;
+import com.bonc.usdp.algorithm.fpgrowth.entity.FreqPatternResult;
+import com.bonc.usdp.algorithm.fpgrowth.entity.TreeNode;
+import com.bonc.usdp.util.FileUtil;
 
+import java.io.File;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -22,12 +27,18 @@ public class FPGrowthRunner {
         this.minSup = minSup;
     }
 
-    public List<FreqPattern> run() {
+    public void run() {
+        System.out.println("start mine (FPGrowth) ...");
         FPGrowth fpGrowth = new FPGrowth();
         List<String> freqlist = new LinkedList<>();
-        List<FreqPattern> freqItemList = new LinkedList<>();
-        fpGrowth.mine(rawData, minSup, freqlist, freqItemList);
-        return freqItemList;
+        String outPath = "G:\\WorkSpace\\Idea\\travel-analyze\\result" + File.separator + "out.txt";
+        FileUtil.deleteFileOrDir(outPath);
+        FreqPatternResult freqPatternResult = new FreqPatternResult(
+                new FileResultProcessor(outPath)
+        );
+        fpGrowth.mine(rawData, minSup, freqlist, freqPatternResult);
+        freqPatternResult.flush();
+        System.out.println("mine done (FPGrowth)");
     }
 
 }

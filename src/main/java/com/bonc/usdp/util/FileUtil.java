@@ -21,6 +21,19 @@ import java.util.Map;
  */
 public class FileUtil {
 
+    public static void appendList(String path, List<String> dataList) {
+        File file = new File(path);
+        try(Sink sink = Okio.appendingSink(file);
+            BufferedSink buffer = Okio.buffer(sink)) {
+            for (Object data : dataList) {
+                buffer.writeUtf8(data.toString()).writeUtf8("\n");
+            }
+            buffer.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public static void writeList(String path, List<?> dataList) {
         File file = new File(path);
         try(Sink sink = Okio.sink(file);
@@ -61,9 +74,14 @@ public class FileUtil {
         return list;
     }
 
-    public static void cleanDir(String path) {
+    public static void deleteFileOrDir(String path) {
         File file = new File(path);
-        if (file.exists() && file.isDirectory()) {
+        if (!file.exists()) {
+            return;
+        }
+        if (!file.isDirectory()) {
+            file.delete();
+        } else {
             File[] subFiles = file.listFiles();
             if (subFiles != null) {
                 Arrays.stream(subFiles).forEachOrdered(File::delete);

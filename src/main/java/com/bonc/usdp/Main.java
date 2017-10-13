@@ -1,15 +1,14 @@
 package com.bonc.usdp;
 
-import com.bonc.usdp.algorithm.fpgrowth.entity.FreqPattern;
+import com.bonc.usdp.analyze.ClustererRunner;
 import com.bonc.usdp.analyze.FPGrowthRunner;
+import com.bonc.usdp.entity.TravelCharacter;
 import com.bonc.usdp.system.Config;
 import com.bonc.usdp.util.FileUtil;
 import com.bonc.usdp.util.PathUtil;
 
-import java.io.File;
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * created on 2017/9/21
@@ -48,16 +47,11 @@ public class Main {
             rawData.add(stringList);
         }
 
-        List<FreqPattern> mineResult = new FPGrowthRunner(rawData, Config.SYSTEM_PARAM_MIN_SUP).run();
-        mineResult.removeIf(result -> result.getPatternList().size() < Config.SYSTEM_PARAM_MIN_PARTNER_NUM);
+        List<List<String>> inputData = new LinkedList<>();
+        rawData.forEach(data -> inputData.add(new LinkedList<>(new HashSet<>(data))));
 
-        List<String> outList = new LinkedList<>();
-        mineResult.forEach(itemList -> {
-            itemList.getPatternList().sort(String::compareTo);
-            outList.add(itemList.getFrequency() + " " + String.join(" ", itemList.getPatternList()));
-        });
-        outList.sort(String::compareTo);
-        FileUtil.writeList("G:\\WorkSpace\\Idea\\travel-analyze\\result" + File.separator + "out.txt", outList);
+        new FPGrowthRunner(inputData, Config.SYSTEM_PARAM_MIN_SUP).run();
+
 
     }
 
