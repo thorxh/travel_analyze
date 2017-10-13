@@ -7,6 +7,7 @@ import com.bonc.usdp.entity.TableInfo;
 import com.bonc.usdp.entity.TravelCharacter;
 import com.bonc.usdp.system.Config;
 import com.bonc.usdp.util.DistanceUtils;
+import com.bonc.usdp.util.Elapse;
 import com.bonc.usdp.util.FileUtil;
 import com.bonc.usdp.util.PathUtil;
 
@@ -38,7 +39,8 @@ public class ClustererRunner {
             DistanceUtils.setDistanceCalType(DistanceUtils.DistanceCalType.ByCityDistance);
         }
 
-        long start = System.currentTimeMillis();
+        Elapse elapse = new Elapse();
+        elapse.start();
 
         Clusterer<TravelCharacter> clusterer = new Clusterer<>(
                 characterAttributeList,
@@ -48,7 +50,7 @@ public class ClustererRunner {
 
         List<List<TravelCharacter>> results  = clusterer.performClustering();
 
-        long end = System.currentTimeMillis();
+        elapse.stop();
 
         FileUtil.deleteFileOrDir(PathUtil.getOutPath());
         for (int i = 0; i < results.size(); i++) {
@@ -62,15 +64,12 @@ public class ClustererRunner {
         });
         FileUtil.writeList(PathUtil.getOutPath() + File.separator + "id_groups.txt", idGroups);
 
-        long time = end - start;
-        int hour = (int) (time / (1000 * 60 * 60));
-        int minute = (int) (time / (1000 * 60));
-        int second = (int) (time / 1000);
         Map<String, String> statisticsMap = new HashMap<>();
         statisticsMap.put("record size", String.valueOf(characterAttributeList.size()));
-        statisticsMap.put("total time", String.format("%sh %sm %ss", hour, minute, second));
+        statisticsMap.put("total time", elapse.get());
         FileUtil.writeMap(PathUtil.getOutPath() + File.separator + "statistics.txt", statisticsMap);
         System.out.println("cluster done (DBScan)");
+        System.out.println("total time " + elapse.get());
         return results;
     }
 

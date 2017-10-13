@@ -52,7 +52,6 @@ public class Main {
 
         new FPGrowthRunner(inputData, Config.SYSTEM_PARAM_MIN_SUP).run();
 
-
     }
 
 }
